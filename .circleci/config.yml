@@ -47,6 +47,12 @@ jobs:
             php artisan migrate --env=testing
 
       - run:
+          name: "Install Latest Chrome Drivers"
+          command: |
+            composer require --dev staudenmeir/dusk-updater
+            php artisan dusk:update --detect
+
+      - run:
           name: Start Chrome Driver
           command: ./vendor/laravel/dusk/bin/chromedriver-linux
           background: true
