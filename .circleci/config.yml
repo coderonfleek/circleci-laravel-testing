@@ -20,9 +20,7 @@ jobs:
 
       - run:
           name: "Create Environment file and generate app key"
-          command: |
-            mv .env.testing .env
-            php artisan key:generate
+          command: mv .env.testing .env
 
       # Download and cache dependencies
       - restore_cache:
@@ -44,6 +42,7 @@ jobs:
       - run:
           name: "Create database and run migration"
           command: |
+            php artisan key:generate
             touch database/database.sqlite
             php artisan migrate --env=testing
 
